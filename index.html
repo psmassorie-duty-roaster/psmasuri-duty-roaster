@@ -1,218 +1,596 @@
+<section class="add-duty">
+
+<h2>Add New Duty</h2>
+
+<input id="name" placeholder="Name">
+
+<input id="rank" placeholder="Rank">
+
+<input id="point" placeholder="Duty Point">
+
+<select id="newShift">
+<option>Morning</option>
+<option>Evening</option>
+<option>Night</option>
+</select>
+
+<input id="mobile" placeholder="Mobile Number">
+
+<select id="status">
+<option>On Duty</option>
+<option>Off Duty</option>
+</select>
+
+<button onclick="addDuty()">
+Add Duty
+</button>
+
+</section>
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Police Duty Roster</title>
-    <style>
-      :root {
-        --navy: #0f2340;
-        --blue: #1f5fbf;
-        --sky: #eaf3ff;
-        --white: #ffffff;
-        --text: #23364d;
-        --muted: #5e728f;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Police Duty Roster</title>
 
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #f5f9ff 0%, #eaf3ff 100%);
-        color: var(--text);
-      }
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
 
-      .topbar {
-        background: var(--navy);
-        color: var(--white);
-        padding: 16px 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+    h1{
+      text-align:center;
+      color:#0d47a1;
+    }
 
-      .brand { font-size: 1.2rem; font-weight: 700; }
-      .pill {
-        background: rgba(255,255,255,0.12);
-        padding: 8px 12px;
-        border-radius: 999px;
-        font-size: 0.9rem;
-      }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      background:#fff;
+      margin-top:20px;
+    }
 
-      .container {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 28px 20px 60px;
-      }
+    th{
+      background:#0d47a1;
+      color:white;
+      padding:12px;
+    }
 
-      .hero {
-        background: var(--white);
-        border-radius: 24px;
-        padding: 32px;
-        box-shadow: 0 20px 45px rgba(15, 35, 64, 0.08);
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 24px;
-        align-items: center;
-      }
+    td{
+      border:1px solid #ccc;
+      padding:10px;
+      text-align:center;
+    }
 
-      .hero h1 {
-        font-size: 2.2rem;
-        margin: 0 0 12px;
-        color: var(--navy);
-      }
+    tr:nth-child(even){
+      background:#f9f9f9;
+    }
 
-      .hero p { color: var(--muted); font-size: 1rem; line-height: 1.6; }
+    footer{
+      text-align:center;
+      margin-top:20px;
+      color:#666;
+    }
+  </style>
+</head>
 
-      .actions { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
-      .btn {
-        border: none;
-        border-radius: 999px;
-        padding: 12px 18px;
-        cursor: pointer;
-        font-weight: 700;
-      }
-      .btn-primary { background: var(--blue); color: var(--white); }
-      .btn-secondary { background: var(--sky); color: var(--navy); }
+<body>
 
-      .stats {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-        margin-top: 22px;
-      }
+<h1>🚔 Police Duty Roster</h1>
 
-      .card {
-        background: var(--white);
-        border-radius: 18px;
-        padding: 18px;
-        box-shadow: 0 12px 30px rgba(15, 35, 64, 0.06);
-      }
+<table>
+<tr>
+<th>S.No</th>
+<th>Name</th>
+<th>Rank</th>
+<th>Duty Point</th>
+<th>Shift</th>
+<th>Date</th>
+</tr>
 
-      .card h3 { margin: 0 0 6px; font-size: 1.2rem; color: var(--navy); }
-      .card .value { font-size: 1.7rem; font-weight: 700; }
-      .card .label { color: var(--muted); font-size: 0.95rem; }
+<tr>
+<td>1</td>
+<td>Constable A</td>
+<td>Constable</td>
+<td>Main Gate</td>
+<td>Morning</td>
+<td>23-07-2026</td>
+</tr>
 
-      .section {
-        margin-top: 24px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
+<tr>
+<td>2</td>
+<td>Constable B</td>
+<td>Head Constable</td>
+<td>Control Room</td>
+<td>Evening</td>
+<td>23-07-2026</td>
+</tr>
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-      }
+<tr>
+<td>3</td>
+<td>SI Sharma</td>
+<td>Sub Inspector</td>
+<td>Patrolling</td>
+<td>Night</td>
+<td>23-07-2026</td>
+</tr>
 
-      th, td {
-        text-align: left;
-        padding: 10px 8px;
-        border-bottom: 1px solid #e6edf8;
-      }
+</table>
 
-      th { color: var(--navy); }
+<footer>
+Police Duty Roster Management System
+</footer>
 
-      .feature-list {
-        display: grid;
-        gap: 10px;
-        margin-top: 12px;
-      }
+</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PS Masuri Duty Roster</title>
 
-      .feature-item {
-        padding: 12px 14px;
-        border-radius: 12px;
-        background: #f7fbff;
-        border: 1px solid #e3ebf8;
-      }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial,sans-serif;
+}
 
-      @media (max-width: 900px) {
-        .hero, .section { grid-template-columns: 1fr; }
-        .stats { grid-template-columns: 1fr; }
-      }
-    </style>
-  </head>
-  <body>
-    <header class="topbar">
-      <div class="brand">🚓 Police Duty Roster</div>
-      <div class="pill" id="today"></div>
-    </header>
+body{
+    background:#eef2f7;
+}
 
-    <main class="container">
-      <section class="hero">
-        <div>
-          <h1>Secure police duty scheduling for modern command centers</h1>
-          <p>Manage officers, duty points, shift rotations, leave approvals, and audit trails from a single responsive dashboard built for fast operations.</p>
-          <div class="actions">
-            <button class="btn btn-primary">Launch Dashboard</button>
-            <button class="btn btn-secondary">View Rotations</button>
-          </div>
-        </div>
-        <div class="card">
-          <h3>Today's Operations</h3>
-          <div class="value">18</div>
-          <div class="label">Active assignments</div>
-          <div class="feature-list">
-            <div class="feature-item">✅ Morning shift coverage ready</div>
-            <div class="feature-item">✅ 2 leave requests pending review</div>
-            <div class="feature-item">✅ Rotation engine scheduled for midnight</div>
-          </div>
-        </div>
-      </section>
+header{
+    background:#0d47a1;
+    color:#fff;
+    padding:18px;
+    text-align:center;
+}
 
-      <section class="stats">
-        <div class="card">
-          <h3>Total Officers</h3>
-          <div class="value">42</div>
-          <div class="label">Active personnel</div>
-        </div>
-        <div class="card">
-          <h3>Duty Points</h3>
-          <div class="value">10</div>
-          <div class="label">Critical locations</div>
-        </div>
-        <div class="card">
-          <h3>Upcoming Rotation</h3>
-          <div class="value">7 Days</div>
-          <div class="label">Next automatic shift</div>
-        </div>
-      </section>
+.container{
+    width:95%;
+    margin:20px auto;
+}
 
-      <section class="section">
-        <div class="card">
-          <h3>Upcoming Duty Schedule</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Officer</th>
-                <th>Point</th>
-                <th>Shift</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Inspector Ahsan</td><td>Main Gate</td><td>Morning</td></tr>
-              <tr><td>SI Raza</td><td>Control Room</td><td>Night</td></tr>
-              <tr><td>Constable Naveed</td><td>Patrol Vehicle</td><td>Evening</td></tr>
-            </tbody>
-          </table>
-        </div>
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-bottom:20px;
+}
 
-        <div class="card">
-          <h3>Core Features</h3>
-          <div class="feature-list">
-            <div class="feature-item">🔐 Secure admin login with JWT</div>
-            <div class="feature-item">🧠 Intelligent 7-day duty rotation</div>
-            <div class="feature-item">🗂️ Officer and duty-point management</div>
-            <div class="feature-item">📋 Leave handling and audit logs</div>
-          </div>
-        </div>
-      </section>
-    </main>
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+    text-align:center;
+}
 
-    <script>
-      document.getElementById('today').textContent = new Date().toDateString();
-    </script>
-  </body>
+.card h2{
+    color:#0d47a1;
+    margin-bottom:10px;
+}
+
+table{
+    width:100%;
+    background:#fff;
+    border-collapse:collapse;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+th{
+    background:#1565c0;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:10px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+tr:nth-child(even){
+    background:#f8f8f8;
+}
+
+button{
+    background:#1565c0;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    margin:15px 5px;
+}
+
+button:hover{
+    background:#0d47a1;
+}
+
+footer{
+    text-align:center;
+    margin:25px;
+    color:#666;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<h1>🚔 PS Masuri Duty Roster Management System</h1>
+<p>Daily Police Duty Management Dashboard</p>
+</header>
+
+<div class="container">
+
+<div class="cards">
+
+<div class="card">
+<h2>125</h2>
+<p>Total Staff</p>
+</div>
+
+<div class="card">
+<h2>95</h2>
+<p>On Duty</p>
+</div>
+
+<div class="card">
+<h2>30</h2>
+<p>Off Duty</p>
+</div>
+
+<div class="card">
+<h2>23 Jul 2026</h2>
+<p>Today's Date</p>
+</div>
+
+</div>
+
+<button onclick="window.print()">🖨 Print Duty Roster</button>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Rank</th>
+<th>Duty Point</th>
+<th>Shift</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>101</td>
+<td>Constable A</td>
+<td>Constable</td>
+<td>Main Gate</td>
+<td>Morning</td>
+<td>✅ On Duty</td>
+</tr>
+
+<tr>
+<td>102</td>
+<td>HC B</td>
+<td>Head Constable</td>
+<td>Control Room</td>
+<td>Evening</td>
+<td>✅ On Duty</td>
+</tr>
+
+<tr>
+<td>103</td>
+<td>SI Sharma</td>
+<td>Sub Inspector</td>
+<td>Patrolling</td>
+<td>Night</td>
+<td>✅ On Duty</td>
+</tr>
+
+</table>
+
+</div>
+
+<footer>
+© 2026 PS Masuri Duty Roster Management System
+</footer>
+
+</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PS Masuri Duty Roster</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🚔 PS Masuri Duty Roster</h1>
+</header>
+
+<nav>
+  <button>Dashboard</button>
+  <button>Today's Duty</button>
+  <button>Staff</button>
+  <button>Reports</button>
+  <button>Settings</button>
+</nav>
+
+<main>
+
+<section class="controls">
+
+<input
+type="date"
+id="date">
+
+<input
+type="text"
+id="search"
+placeholder="Search by name...">
+
+<select id="shift">
+<option>All Shifts</option>
+<option>Morning</option>
+<option>Evening</option>
+<option>Night</option>
+</select>
+
+<button id="addBtn">Add Duty</button>
+
+<button onclick="window.print()">
+Print
+</button>
+
+</section>
+
+<section>
+
+<table id="dutyTable">
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Rank</th>
+<th>Duty Point</th>
+<th>Shift</th>
+<th>Mobile</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<!-- JavaScript se rows load hongi -->
+
+</tbody>
+
+</table>
+
+</section>
+
+</main>
+
+<footer>
+
+PS Masuri Duty Roster Management System
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PS Masuri Duty Roster</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f2f2f2;
+padding:20px;
+}
+
+h1{
+text-align:center;
+background:#003366;
+color:white;
+padding:15px;
+}
+
+input{
+width:300px;
+padding:10px;
+margin:10px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+}
+
+th{
+background:#003366;
+color:white;
+padding:10px;
+}
+
+td{
+border:1px solid #ccc;
+padding:8px;
+text-align:center;
+}
+
+tr:nth-child(even){
+background:#f7f7f7;
+}
+
+button{
+padding:8px 15px;
+background:#003366;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>
+🚔 थाना मसूरी ड्यूटी रोस्टर
+</h1>
+
+
+<input 
+type="text"
+id="search"
+placeholder="नाम / मोबाइल खोजें..."
+onkeyup="searchData()"
+>
+
+
+<button onclick="window.print()">
+Print Roster
+</button>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>क्र0सं0</th>
+<th>पी0एन0ओ0</th>
+<th>पद</th>
+<th>नाम</th>
+<th>वर्तमान ड्यूटी</th>
+<th>मो0न0</th>
+<th>अन्य विवरण</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="roster">
+
+</tbody>
+
+
+</table>
+
+
+<script src="data.js"></script>
+
+
+<script>
+
+
+function loadData(){
+
+let html="";
+
+
+rosterData.forEach((item)=>{
+
+
+html+=`
+
+<tr>
+
+<td>${item.no}</td>
+
+<td>${item.pno}</td>
+
+<td>${item.rank}</td>
+
+<td>${item.name}</td>
+
+<td>${item.duty}</td>
+
+<td>${item.mobile}</td>
+
+<td>${item.other}</td>
+
+
+</tr>
+
+
+`;
+
+});
+
+
+document.getElementById("roster").innerHTML=html;
+
+
+}
+
+
+function searchData(){
+
+let value=document
+.getElementById("search")
+.value
+.toLowerCase();
+
+
+let rows=document
+.querySelectorAll("#roster tr");
+
+
+rows.forEach(row=>{
+
+
+row.style.display=
+row.innerText
+.toLowerCase()
+.includes(value)
+?
+""
+:
+"none";
+
+
+});
+
+
+}
+
+
+loadData();
+
+
+</script>
+
+
+</body>
 </html>
+
 
