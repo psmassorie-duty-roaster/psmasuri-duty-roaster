@@ -1,0 +1,113 @@
+<script>
+
+if(localStorage.getItem("login")!="true"){
+
+window.location.href="login.html";
+
+}
+
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PS Masuri Admin Panel</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>🚔 PS Masuri Duty Roster Admin</h1>
+
+<p>Add New Police Personnel</p>
+
+</header>
+
+
+
+<div class="topbar">
+
+
+<input id="section" placeholder="Section / Chowki">
+
+<input id="pno" placeholder="PNO Number">
+
+<input id="name" placeholder="Name">
+
+<input id="mobile" placeholder="Mobile">
+
+<input id="duty" placeholder="Duty Details">
+
+
+<button onclick="addEmployee()">
+➕ Add Employee
+</button>
+
+
+</div>
+
+
+
+<div id="status">
+
+Ready...
+
+</div>
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Section</th>
+
+<th>PNO</th>
+
+<th>Name</th>
+
+<th>Mobile</th>
+
+<th>Duty</th>
+
+<th>Action</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody id="adminTable">
+
+
+</tbody>
+
+
+</table>
+
+
+
+
+<script src="admin.js"></script>
+
+
+</body>
+
+</html>

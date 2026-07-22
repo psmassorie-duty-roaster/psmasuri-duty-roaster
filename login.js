@@ -1,8 +1,3 @@
-let savedPassword =
-localStorage.getItem("adminPassword")
-|| "12345";
-
-
 function login(){
 
 
@@ -15,8 +10,10 @@ document.getElementById("password").value;
 
 
 
-if(user=="admin" && pass==savedPassword)
-{
+// Default Admin Login
+
+if(user=="admin" && pass=="12345"){
+
 
 localStorage.setItem(
 "login",
@@ -24,17 +21,21 @@ localStorage.setItem(
 );
 
 
-window.location="admin.html";
+
+window.location.href="admin.html";
 
 
 }
 
-else
-{
+else{
 
-alert("Wrong Username or Password");
+
+document.getElementById("msg").innerHTML =
+"❌ Wrong Username / Password";
+
 
 }
+
 
 
 }

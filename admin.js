@@ -1,53 +1,14 @@
-if(localStorage.getItem("login")!="true")
-{
-
-window.location="login.html";
-
-}
-function loadData(){
-
-let table=document.getElementById("adminTable");
-
-table.innerHTML="";
-
-
-dutyData.forEach((x)=>{
-
-
-table.innerHTML += `
-
-<tr>
-
-<td>${x.section}</td>
-
-<td>${x.pno}</td>
-
-<td>${x.name}</td>
-
-<td>${x.mobile}</td>
-
-<td>${x.duty}</td>
-
-
-</tr>
-
-
-`;
-
-});
-
-
-}
-
-
-loadData();
+let employees = JSON.parse(
+localStorage.getItem("employees")
+) || [];
 
 
 
 function addEmployee(){
 
 
-let newData={
+let data = {
+
 
 section:
 document.getElementById("section").value,
@@ -68,21 +29,116 @@ document.getElementById("mobile").value,
 duty:
 document.getElementById("duty").value
 
+
 };
 
 
 
-dutyData.push(newData);
+if(data.name==""){
+
+alert("Name Required");
+
+return;
+
+}
 
 
 
-alert("Employee Added");
+employees.push(data);
 
 
-loadData();
+
+localStorage.setItem(
+"employees",
+JSON.stringify(employees)
+);
+
+
+
+showEmployees();
+
+
+
+document.getElementById("status").innerHTML =
+"✅ Employee Added";
 
 
 }
-<button onclick="logout()">
-Logout
+
+
+
+function showEmployees(){
+
+
+let table =
+document.getElementById("adminTable");
+
+
+table.innerHTML="";
+
+
+
+employees.forEach((e,index)=>{
+
+
+table.innerHTML += `
+
+
+<tr>
+
+<td>${e.section}</td>
+
+<td>${e.pno}</td>
+
+<td>${e.name}</td>
+
+<td>${e.mobile}</td>
+
+<td>${e.duty}</td>
+
+<td>
+
+<button onclick="deleteEmployee(${index})">
+
+Delete
+
 </button>
+
+</td>
+
+
+</tr>
+
+
+`;
+
+
+});
+
+
+}
+
+
+
+
+function deleteEmployee(index){
+
+
+employees.splice(index,1);
+
+
+localStorage.setItem(
+"employees",
+JSON.stringify(employees)
+);
+
+
+
+showEmployees();
+
+
+}
+
+
+
+showEmployees();
