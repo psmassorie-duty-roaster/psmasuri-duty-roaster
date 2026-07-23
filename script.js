@@ -50,9 +50,26 @@ XLSX.utils.sheet_to_json(sheet,{
 // Header वाली row खोजना
 
 let headerIndex =
-rows.findIndex(row =>
-    row.includes("पीएनओ न0")
-);
+rows.findIndex(row => {
+
+    return row.some(cell => {
+
+        if(!cell) return false;
+
+        let text = cell.toString()
+        .replace(/\s/g,'')
+        .toLowerCase();
+
+
+        return (
+            text.includes("पीएनओ") ||
+            text.includes("pno")
+        );
+
+    });
+
+});
+
 
 
 
