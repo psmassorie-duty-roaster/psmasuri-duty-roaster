@@ -1,89 +1,236 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PS Masuri Duty Roster</title>
+<title>थाना मसूरी ड्यूटी चार्ट</title>
 
 <link rel="stylesheet" href="style.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
 </head>
+
 
 <body>
 
+
 <header>
 
-<h1>🚔 PS Masuri Duty Roster</h1>
+<h1>🚔 थाना मसूरी</h1>
 
-<p>Police Station Masuri | Commissionerate Ghaziabad</p>
+<h2>कमिश्नरेट गाजियाबाद</h2>
+
+<p>
+ड्यूटी चार्ट प्रबंधन प्रणाली
+</p>
+
+<p id="todayDate"></p>
 
 </header>
 
-<div class="topbar">
 
-<input
+
+<div class="dashboard">
+
+
+<div class="card">
+
+<h2 id="totalStaff">
+0
+</h2>
+
+<p>
+कुल कर्मचारी
+</p>
+
+</div>
+
+
+<div class="card green">
+
+<h2 id="onDuty">
+0
+</h2>
+
+<p>
+ड्यूटी पर
+</p>
+
+</div>
+
+
+
+<div class="card red">
+
+<h2 id="offDuty">
+0
+</h2>
+
+<p>
+अवकाश / अनुपस्थित
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="control">
+
+
+<input 
 type="file"
 id="excelFile"
 accept=".xlsx,.xls">
 
+
 <button onclick="uploadExcel()">
-📤 Upload Excel
+📂 Excel Upload
 </button>
 
-<input
+
+
+<input 
 type="text"
 id="search"
-placeholder="Search Name / PNO / Mobile"
+placeholder="नाम / PNO / मोबाइल खोजें"
 onkeyup="searchData()">
+
+
+
+<select id="sectionFilter" onchange="filterSection()">
+
+<option value="">
+सभी शाखा / चौकी
+</option>
+
+
+</select>
+
+
+
+<button onclick="exportExcel()">
+📥 Export Excel
+</button>
+
+
 
 <button onclick="window.print()">
 🖨 Print
 </button>
 
+
 </div>
+
+
+
+
 
 <div id="status">
 
-No File Uploaded
+Excel Upload करें
 
 </div>
 
-<table id="dutyTable">
+
+
+
+<table>
+
 
 <thead>
 
 <tr>
 
-<th>Section</th>
+<th>क्रम</th>
+
+<th>शाखा / चौकी</th>
 
 <th>PNO</th>
 
-<th>Name</th>
+<th>नाम</th>
 
-<th>Mobile</th>
+<th>मोबाइल</th>
 
-<th>Duty</th>
+<th>ड्यूटी विवरण</th>
+
 
 </tr>
 
+
 </thead>
+
+
 
 <tbody id="tableBody">
 
+
 </tbody>
+
+
 
 </table>
 
+
+
+<footer>
+
+थाना मसूरी | कमिश्नरेट गाजियाबाद
+
+</footer>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 <script src="script.js"></script>
+
+
+<script>
+
+
+let date=new Date();
+
+document.getElementById("todayDate").innerHTML =
+"दिनांक : "
++date.toLocaleDateString("hi-IN");
+
+
+</script>
+
 
 </body>
 </html>
-<select id="sectionFilter" onchange="filterSection()">
+<div class="rankBox">
 
-<option value="">सभी शाखा / चौकी</option>
+<h2>👮 पद के अनुसार संख्या</h2>
 
-</select>
+<p>निरीक्षक / उपनिरीक्षक :
+<span id="siCount">0</span>
+</p>
+
+<p>हेड कांस्टेबल :
+<span id="hcCount">0</span>
+</p>
+
+
+<p>आरक्षी :
+<span id="constCount">0</span>
+</p>
+
+
+</div>
+
+
+<div class="rankBox">
+
+<h2>🏢 चौकी अनुसार संख्या</h2>
+
+<div id="chowkiCount"></div>
+
+</div>

@@ -122,6 +122,7 @@ return obj;
 
 
         showTable(dutyData);
+        calculateDashboard();
 
 
 
@@ -318,6 +319,99 @@ item["Section"] ||
 
 
 showTable(result);
+
+
+}
+function calculateDashboard(){
+
+
+let si=0;
+let hc=0;
+let con=0;
+
+let chowki={};
+
+
+
+dutyData.forEach(item=>{
+
+
+let rank =
+(item["नाम अधि0/कर्म0गण"] || "")
+.toString();
+
+
+
+if(rank.includes("उ0नि") || rank.includes("नि0"))
+{
+si++;
+}
+
+
+else if(rank.includes("है0का") || rank.includes("हे0का"))
+{
+hc++;
+}
+
+
+else if(rank.includes("का0") || rank.includes("रि0का"))
+{
+con++;
+}
+
+
+
+
+let section =
+item["शाखा"] ||
+item["Section"] ||
+"अन्य";
+
+
+
+if(!chowki[section])
+{
+
+chowki[section]=0;
+
+}
+
+
+chowki[section]++;
+
+
+
+});
+
+
+
+document.getElementById("siCount").innerHTML=si;
+
+document.getElementById("hcCount").innerHTML=hc;
+
+document.getElementById("constCount").innerHTML=con;
+
+
+
+let html="";
+
+
+Object.keys(chowki).forEach(x=>{
+
+
+html+=`
+
+<p>
+${x} :
+<b>${chowki[x]}</b>
+</p>
+
+`;
+
+});
+
+
+document.getElementById("chowkiCount").innerHTML=html;
 
 
 }
