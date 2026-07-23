@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>7 Day Duty Roster</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>🚔 थाना मसूरी</h1>
+
+<h2>कमिश्नरेट गाजियाबाद</h2>
+
+<h3>7 दिन का Auto Duty Roster</h3>
+
+</header>
+
+
+
+<div class="control">
+
+<button onclick="generateRoster()">
+Generate 7 Days Roster
+</button>
+
+
+<button onclick="window.print()">
+Print
+</button>
+
+
+</div>
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>दिनांक</th>
+<th>PNO</th>
+<th>नाम</th>
+<th>पद</th>
+<th>ड्यूटी</th>
+<th>स्थिति</th>
+
+
+</tr>
+
+</thead>
+
+
+<tbody id="rosterTable">
+
+
+</tbody>
+
+
+</table>
+
+
+
+
+<script src="data.js"></script>
+
+<script src="roster.js"></script>
+
+
+</body>
+
+</html>
+function checkLeave(pno){
+
+
+let leaves =
+JSON.parse(localStorage.getItem("leaveData"))
+|| [];
+
+
+
+let today =
+new Date()
+.toISOString()
+.split("T")[0];
+
+
+
+return leaves.some(x=>{
+
+
+return x.pno==pno
+&&
+today>=x.from
+&&
+today<=x.to;
+
+
+});
+
+
+}

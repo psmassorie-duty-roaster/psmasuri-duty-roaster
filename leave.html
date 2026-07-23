@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<title>Leave Management</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>🚔 थाना मसूरी</h1>
+
+<h2>Leave Management</h2>
+
+</header>
+
+
+
+<div class="control">
+
+<input id="pno" placeholder="PNO">
+
+<input id="name" placeholder="नाम">
+
+
+<select id="leaveType">
+
+<option>CL</option>
+<option>EL</option>
+<option>Medical</option>
+<option>Training</option>
+
+</select>
+
+
+<input type="date" id="fromDate">
+
+
+<input type="date" id="toDate">
+
+
+
+<button onclick="saveLeave()">
+
+Save Leave
+
+</button>
+
+
+</div>
+
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>PNO</th>
+<th>नाम</th>
+<th>Leave</th>
+<th>From</th>
+<th>To</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="leaveTable">
+
+</tbody>
+
+
+</table>
+
+
+
+<script src="leave.js"></script>
+
+
+</body>
+
+</html>
